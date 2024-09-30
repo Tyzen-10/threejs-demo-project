@@ -8,6 +8,7 @@ import {
   WebGLRenderer,
 } from "three";
 import "./style.css"
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 const scene = new Scene();
 
 /* Create a Sphere */
@@ -46,13 +47,22 @@ const light = new PointLight(0xFFFFFF, 100, 100);
 light.position.set(0,10,10)
 scene.add(light);
 
+
 //Renderer
 const canvas = document.querySelector(".webgl");
 const renderer = new WebGLRenderer({ canvas });
 //how big canvas is and where to render it - code below
 // renderer.setSize(800, 600);
 renderer.setSize(sizes.width, sizes.height)
+renderer.setPixelRatio(2); //much smoother edges.
 renderer.render(scene, camera);
+
+//Controls
+const controls = new OrbitControls(camera, canvas)
+controls.enableDamping = true
+controls.enablePan = false
+controls.enableZoom = false
+controls.autoRotate = true
 
 //Resize
 window.addEventListener('resize', () => {
@@ -70,6 +80,7 @@ window.addEventListener('resize', () => {
 
 //animation loop
 function animate() {
+  controls.update() //makes the movement keep going even after mouse release.
   renderer.render(scene,camera)
   window.requestAnimationFrame(animate)
 } 
