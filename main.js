@@ -65,5 +65,13 @@ window.addEventListener('resize', () => {
   camera.updateProjectionMatrix() // what does this do? 
   renderer.setSize(sizes.width, sizes.height);
 
-  renderer.render(scene,camera); // this will re-render on resize.
+  // renderer.render(scene,camera); // this will re-render on resize.
 })
+
+//animation loop
+function animate() {
+  renderer.render(scene,camera)
+  window.requestAnimationFrame(animate)
+} 
+//we know what this code does? but why does it work the way it does?
+animate();
