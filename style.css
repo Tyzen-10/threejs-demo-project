@@ -7,7 +7,42 @@
     overflow-x: hidden;
     overflow-y: hidden;
 } */
-
+body,html{
+    font-family: "Poppins", sans-serif;
+}
 canvas{
     display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+nav{
+    color: white;
+    z-index: 2;
+    position: relative;
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+}
+nav > ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+nav > a{
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+}
+
+.title{
+    color: white;
+    font-size: 3rem;
+    z-index: 2;
+    position: absolute; /* what does a position absolute without giving top do? will it just take it out of flow*/
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%,25%);
 }
