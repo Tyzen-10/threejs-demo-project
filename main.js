@@ -1,4 +1,5 @@
 import {
+  Color,
   Mesh,
   MeshStandardMaterial,
   PerspectiveCamera,
@@ -94,3 +95,26 @@ tl.fromTo(mesh.scale, {z:0,x:0,y:0}, {z:1,x:1,y:1})
 //what is mesh.scale?
 tl.fromTo("nav", {y:'-100%'}, {y: '0%'})
 tl.fromTo(".title", {opacity:0}, {opacity:1})
+
+//mouse color animation
+let mouseDown = false;
+let rgb = []
+window.addEventListener("mousedown", () => {mouseDown = true})
+window.addEventListener("mouseup", () => {mouseDown = false})
+
+window.addEventListener("mousemove", (e) => {
+  if(mouseDown) {
+    rgb = [
+      Math.round((e.pageX / sizes.width) * 255),
+      Math.round((e.pageY / sizes.height) * 255),
+      150, // for z axis -> just our own choice of color
+    ]
+    //animate using gsap
+    let newColor = new Color(`rgb(${rgb.join(",")})`)
+    gsap.to(mesh.material.color, {
+      r: newColor.r,
+      g: newColor.g,
+      b:newColor.b,
+    })
+  }
+})
